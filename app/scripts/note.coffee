@@ -9,6 +9,9 @@ class Note
 
     @draw()
 
+  getElement: ->
+    @s.node
+
   draw: ->
     bigCircle = @s.circle 150, 150, 100
     bigCircle.attr
