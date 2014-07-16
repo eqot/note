@@ -1,1 +1,3 @@
-console.log "'Allo from CoffeeScript!"
+'use strict'
+
+note = new Note()
