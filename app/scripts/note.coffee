@@ -4,6 +4,7 @@ class Note
 
   s: null
 
+  strokeColor: '#000000'
   strokeWidth: 1
 
   constructor: (target) ->
@@ -24,7 +25,7 @@ class Note
   drawLine: (x0, y0, x1, y1) ->
     line = @s.line x0, y0, x1, y1
     line.attr
-      stroke: "#000"
+      stroke: @strokeColor
       strokeWidth: @strokeWidth
 
 window.Note = Note
