@@ -10,6 +10,9 @@ class Event
   note: null
   element: null
 
+  prevX = null;
+  prevY = null;
+
   constructor: (note) ->
     @state = @State.RELEASE
 
@@ -25,13 +28,19 @@ class Event
   onDown: (event) ->
     @state = @State.PRESS
 
-    {x, y} = event
-    console.log "#{x}, #{y}"
+    @prevX = event.x
+    @prevY = event.y
+    # console.log "#{@prevX}, #{@prevY}"
 
   onMove: (event) ->
     if @state is @State.PRESS
       {x, y} = event
-      console.log "#{x}, #{y}"
+      # console.log "#{x}, #{y}"
+
+      @note.drawLine @prevX, @prevY, x, y
+
+      @prevX = event.x
+      @prevY = event.y
 
   onUp: (event) ->
     @state = @State.RELEASE

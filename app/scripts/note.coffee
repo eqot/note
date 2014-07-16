@@ -4,6 +4,8 @@ class Note
 
   s: null
 
+  strokeWidth: 1
+
   constructor: (target) ->
     @s = Snap target
 
@@ -19,5 +21,10 @@ class Note
       stroke: "#000"
       strokeWidth: 5
 
+  drawLine: (x0, y0, x1, y1) ->
+    line = @s.line x0, y0, x1, y1
+    line.attr
+      stroke: "#000"
+      strokeWidth: @strokeWidth
 
 window.Note = Note
