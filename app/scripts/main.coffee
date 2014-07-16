@@ -1,3 +1,3 @@
 'use strict'
 
-note = new Note()
+note = new Note '#canvas'

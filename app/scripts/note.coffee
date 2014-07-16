@@ -2,8 +2,19 @@
 
 class Note
 
-  constructor: ->
-    console.log 'ok'
+  s: null
+
+  constructor: (target) ->
+    @s = Snap target
+
+    @draw()
+
+  draw: ->
+    bigCircle = @s.circle 150, 150, 100
+    bigCircle.attr
+      fill: "#bada55"
+      stroke: "#000"
+      strokeWidth: 5
 
 
 window.Note = Note
