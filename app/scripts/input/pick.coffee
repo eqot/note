@@ -12,13 +12,17 @@ class Pick extends HandlerBase
     @state = @State.RELEASE
 
   onDown: (event) ->
-    {x, y} = event
+    event.preventDefault()
+
+    [x, y] = @getPoint event
 
     console.log x, y
 
   onMove: (event) ->
+    event.preventDefault()
 
   onUp: (event) ->
+    event.preventDefault()
 
 
 window.Pick = Pick

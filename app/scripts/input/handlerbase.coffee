@@ -21,6 +21,10 @@ class HandlerBase
     @addListener @dom, 'mousemove', @onMove?.bind @
     @addListener @dom, 'mouseup',   @onUp?.bind @
 
+    @addListener @dom, 'touchstart', @onDown?.bind @
+    @addListener @dom, 'touchmove',  @onMove?.bind @
+    @addListener @dom, 'touchend',   @onUp?.bind @
+
   deactivate: ->
     @removeAllListeners()
 
@@ -32,5 +36,12 @@ class HandlerBase
   removeAllListeners: ->
     for [target, event, listener] in @listeners
       target.removeEventListener event, listener
+
+  getPoint: (event) ->
+    if event.touches?
+      return [event.touches[0].clientX, event.touches[0].clientY]
+    else
+      return [event.x, event.y]
+
 
 window.HandlerBase = HandlerBase
