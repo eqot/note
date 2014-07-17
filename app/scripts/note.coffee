@@ -12,7 +12,7 @@ class Note
   constructor: (target) ->
     @s = Snap target
 
-  getElement: ->
+  getDom: ->
     @s.node
 
   startLine: ->
