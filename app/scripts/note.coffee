@@ -6,6 +6,7 @@ class Note
 
   strokeColor: '#000000'
   strokeWidth: 1
+  fillColor: '#ffffff'
 
   group: null
 
@@ -44,6 +45,6 @@ class Note
     rectangle.attr
       stroke: @strokeColor
       strokeWidth: @strokeWidth
-      fill: 'none'
+      fill: @fillColor
 
 window.Note = Note
