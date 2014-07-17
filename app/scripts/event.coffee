@@ -8,36 +8,34 @@ class Event
   state: null
 
   note: null
-  element: null
+  dom: null
 
-  prevX = null;
-  prevY = null;
-
+  prevX: null
+  prevY: null
   stroke: null
 
   constructor: (note) ->
-    @state = @State.RELEASE
-
     @note = note
 
-    @element = @note.getElement()
-    @element.addEventListener 'mousedown', @onDown.bind @
-    @element.addEventListener 'mousemove', @onMove.bind @
-    @element.addEventListener 'mouseup',   @onUp.bind @
+    @dom = @note.getDom()
+    @dom.addEventListener 'mousedown', @onDown.bind @
+    @dom.addEventListener 'mousemove', @onMove.bind @
+    @dom.addEventListener 'mouseup',   @onUp.bind @
+
+    @state = @State.RELEASE
 
   onDown: (event) ->
-    @state = @State.PRESS
-
     {x, y} = event
 
     @stroke = []
-    @stroke.push x
-    @stroke.push y
+    @stroke.push x, y
 
     @prevX = x
     @prevY = y
 
     @note.startLine()
+
+    @state = @State.PRESS
 
   onMove: (event) ->
     if @state is @State.PRESS
@@ -45,20 +43,19 @@ class Event
 
       @note.drawLine @prevX, @prevY, x, y
 
-      @stroke.push x
-      @stroke.push y
+      @stroke.push x, y
 
       @prevX = x
       @prevY = y
 
   onUp: (event) ->
-    @state = @State.RELEASE
+    # console.log @stroke
+    @note.drawPolyline @stroke
 
     line = @note.endLine()
     line.remove()
 
-    # console.log @stroke
-    @note.drawPolyline @stroke
+    @state = @State.RELEASE
 
 
 window.Event = Event
