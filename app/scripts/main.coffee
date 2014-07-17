@@ -11,7 +11,7 @@ class NoteCore
     @note = new Note '#canvas'
 
     @handlers['pick'] = new Pick @note
-    @handlers['freehand'] = new Event @note
+    @handlers['freehand'] = new Freehand @note
 
     for button in document.querySelectorAll '#buttons button'
       button.addEventListener 'click', @onClick.bind @

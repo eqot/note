@@ -1,6 +1,6 @@
 'use strict'
 
-class Pick extends EventHandler
+class Pick extends HandlerBase
 
   State:
     RELEASE: 0

@@ -1,6 +1,6 @@
 'use strict'
 
-class Event extends EventHandler
+class Freehand extends HandlerBase
 
   State:
     RELEASE: 0
@@ -49,4 +49,4 @@ class Event extends EventHandler
     @state = @State.RELEASE
 
 
-window.Event = Event
+window.Freehand = Freehand
