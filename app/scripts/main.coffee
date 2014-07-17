@@ -12,11 +12,13 @@ class NoteCore
 
     @handlers['pick'] = new Pick @note
     @handlers['freehand'] = new Freehand @note
+    @handlers['rectangle'] = new Rectangle @note
 
     for button in document.querySelectorAll '#buttons button'
       button.addEventListener 'click', @onClick.bind @
 
     @setMode 'freehand'
+    @setMode 'rectangle'
 
   onClick: (event) ->
     @setMode event.target.id
