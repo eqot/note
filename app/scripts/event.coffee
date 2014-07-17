@@ -21,8 +21,6 @@ class Event
     @note = note
 
     @element = @note.getElement()
-    # console.log @element
-
     @element.addEventListener 'mousedown', @onDown.bind @
     @element.addEventListener 'mousemove', @onMove.bind @
     @element.addEventListener 'mouseup',   @onUp.bind @
@@ -30,29 +28,28 @@ class Event
   onDown: (event) ->
     @state = @State.PRESS
 
+    {x, y} = event
+
     @stroke = []
+    @stroke.push x
+    @stroke.push y
 
-    @prevX = event.x
-    @prevY = event.y
-    # console.log "#{@prevX}, #{@prevY}"
-
-    @stroke.push event.x
-    @stroke.push event.y
+    @prevX = x
+    @prevY = y
 
     @note.startLine()
 
   onMove: (event) ->
     if @state is @State.PRESS
       {x, y} = event
-      # console.log "#{x}, #{y}"
 
       @note.drawLine @prevX, @prevY, x, y
 
-      @prevX = event.x
-      @prevY = event.y
+      @stroke.push x
+      @stroke.push y
 
-      @stroke.push event.x
-      @stroke.push event.y
+      @prevX = x
+      @prevY = y
 
   onUp: (event) ->
     @state = @State.RELEASE
