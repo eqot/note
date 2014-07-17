@@ -1,6 +1,6 @@
 'use strict'
 
-class EventHandler
+class HandlerBase
 
   state: null
 
@@ -33,4 +33,4 @@ class EventHandler
     for [target, event, listener] in @listeners
       target.removeEventListener event, listener
 
-window.EventHandler = EventHandler
+window.HandlerBase = HandlerBase
