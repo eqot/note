@@ -34,7 +34,7 @@ class Note
     line.attr
       stroke: @strokeColor
       strokeWidth: @strokeWidth
-      fill: "none"
+      fill: 'none'
 
 
 window.Note = Note
