@@ -1,48 +1,51 @@
 'use strict'
 
-class Event
+class Event extends EventHandler
 
   State:
     RELEASE: 0
     PRESS: 1
-  state: null
 
-  note: null
-  element: null
-
-  prevX = null;
-  prevY = null;
+  prevX: null
+  prevY: null
+  stroke: null
 
   constructor: (note) ->
+    super note
+
     @state = @State.RELEASE
 
-    @note = note
-
-    @element = @note.getElement()
-    console.log @element
-
-    @element.addEventListener 'mousedown', @onDown.bind @
-    @element.addEventListener 'mousemove', @onMove.bind @
-    @element.addEventListener 'mouseup',   @onUp.bind @
-
   onDown: (event) ->
-    @state = @State.PRESS
+    {x, y} = event
 
-    @prevX = event.x
-    @prevY = event.y
-    # console.log "#{@prevX}, #{@prevY}"
+    @stroke = []
+    @stroke.push x, y
+
+    @prevX = x
+    @prevY = y
+
+    @note.startLine()
+
+    @state = @State.PRESS
 
   onMove: (event) ->
     if @state is @State.PRESS
       {x, y} = event
-      # console.log "#{x}, #{y}"
 
       @note.drawLine @prevX, @prevY, x, y
 
-      @prevX = event.x
-      @prevY = event.y
+      @stroke.push x, y
+
+      @prevX = x
+      @prevY = y
 
   onUp: (event) ->
+    # console.log @stroke
+    @note.drawPolyline @stroke
+
+    line = @note.endLine()
+    line.remove()
+
     @state = @State.RELEASE
 
 
