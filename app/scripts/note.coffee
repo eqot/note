@@ -10,7 +10,7 @@ class Note
   constructor: (target) ->
     @s = Snap target
 
-    @draw()
+    # @draw()
 
   getElement: ->
     @s.node
@@ -27,5 +27,13 @@ class Note
     line.attr
       stroke: @strokeColor
       strokeWidth: @strokeWidth
+
+  drawPolyline: (stroke) ->
+    line = @s.polyline stroke
+    line.attr
+      stroke: @strokeColor
+      strokeWidth: @strokeWidth
+      fill: "none"
+
 
 window.Note = Note
