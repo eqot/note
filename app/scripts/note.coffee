@@ -7,6 +7,8 @@ class Note
   strokeColor: '#000000'
   strokeWidth: 1
 
+  group: null
+
   constructor: (target) ->
     @s = Snap target
 
@@ -22,11 +24,19 @@ class Note
       stroke: "#000"
       strokeWidth: 5
 
+  startLine: ->
+    @group = @s.g()
+
   drawLine: (x0, y0, x1, y1) ->
     line = @s.line x0, y0, x1, y1
     line.attr
       stroke: @strokeColor
       strokeWidth: @strokeWidth
+
+    @group.add line
+
+  endLine: ->
+    return @group
 
   drawPolyline: (stroke) ->
     line = @s.polyline stroke
