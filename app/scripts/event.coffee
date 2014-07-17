@@ -1,26 +1,17 @@
 'use strict'
 
-class Event
+class Event extends EventHandler
 
   State:
     RELEASE: 0
     PRESS: 1
-  state: null
-
-  note: null
-  dom: null
 
   prevX: null
   prevY: null
   stroke: null
 
   constructor: (note) ->
-    @note = note
-
-    @dom = @note.getDom()
-    @dom.addEventListener 'mousedown', @onDown.bind @
-    @dom.addEventListener 'mousemove', @onMove.bind @
-    @dom.addEventListener 'mouseup',   @onUp.bind @
+    super note
 
     @state = @State.RELEASE
 

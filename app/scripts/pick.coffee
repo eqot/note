@@ -1,22 +1,13 @@
 'use strict'
 
-class Pick
+class Pick extends EventHandler
 
   State:
     RELEASE: 0
     PRESS: 1
-  state: null
-
-  note: null
-  dom: null
 
   constructor: (note) ->
-    @note = note
-
-    @dom = @note.getDom()
-    @dom.addEventListener 'mousedown', @onDown.bind @
-    @dom.addEventListener 'mousemove', @onMove.bind @
-    @dom.addEventListener 'mouseup',   @onUp.bind @
+    super note
 
     @state = @State.RELEASE
 
