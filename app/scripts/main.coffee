@@ -16,12 +16,12 @@ class NoteCore
     for button in document.querySelectorAll '#buttons button'
       button.addEventListener 'click', @onClick.bind @
 
-    @changeMode 'freehand'
+    @setMode 'freehand'
 
   onClick: (event) ->
-    @changeMode event.target.id
+    @setMode event.target.id
 
-  changeMode: (mode) ->
+  setMode: (mode) ->
     @prevHandler?.deactivate()
 
     handler = @handlers[mode]
