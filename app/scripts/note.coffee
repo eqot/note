@@ -42,6 +42,8 @@ class Note
     line.attr
       stroke: @strokeColor
       strokeWidth: @strokeWidth
+      strokeLinecap: 'round'
+      strokeLinejoin: 'round'
       fill: 'none'
 
     @layer.append line
