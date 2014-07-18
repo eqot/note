@@ -56,11 +56,15 @@ class HandlerBase
 
     @onDown? @event
 
-  onNativeMove: (x, y) ->
-    @event.x = x / @devicePixelRatio
-    @event.y = y / @devicePixelRatio
+  onNativeMove: (events) ->
+    while events.length > 0
+      x = events.shift()
+      y = events.shift()
 
-    @onMove? @event
+      @event.x = x / @devicePixelRatio
+      @event.y = y / @devicePixelRatio
+
+      @onMove? @event
 
   onNativeUp: ->
     @onUp? @event
