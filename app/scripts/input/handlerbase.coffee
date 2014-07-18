@@ -9,12 +9,19 @@ class HandlerBase
 
   listeners: null
 
+  devicePixelRatio: 1
+
+  event:
+    preventDefault: ->
+
   constructor: (note) ->
     @note = note
 
     @dom = @note.getDom()
 
     @listeners = []
+
+    @devicePixelRatio = window.devicePixelRatio
 
   activate: ->
     @addListener @dom, 'mousedown', @onDown?.bind @
@@ -42,6 +49,21 @@ class HandlerBase
       return [event.touches[0].clientX, event.touches[0].clientY]
     else
       return [event.x, event.y]
+
+  onNativeDown: (x, y) ->
+    @event.x = x / @devicePixelRatio
+    @event.y = y / @devicePixelRatio
+
+    @onDown? @event
+
+  onNativeMove: (x, y) ->
+    @event.x = x / @devicePixelRatio
+    @event.y = y / @devicePixelRatio
+
+    @onMove? @event
+
+  onNativeUp: ->
+    @onUp? @event
 
 
 window.HandlerBase = HandlerBase

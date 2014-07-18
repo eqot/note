@@ -18,7 +18,7 @@ class NoteCore
       button.addEventListener 'click', @onClick.bind @
 
     @setMode 'freehand'
-    @setMode 'rectangle'
+    # @setMode 'rectangle'
 
   onClick: (event) ->
     @setMode event.target.id
@@ -28,6 +28,11 @@ class NoteCore
 
     handler = @handlers[mode]
     handler?.activate()
+
+    window.native =
+      mouseDown: handler.onNativeDown.bind handler
+      mouseMove: handler.onNativeMove.bind handler
+      mouseUp:   handler.onNativeUp.bind handler
 
     @prevHandler = handler
 
