@@ -9,6 +9,8 @@ class Pick extends HandlerBase
   focus: null
   focusedElements: null
 
+  focusPosition: null
+
   constructor: (note) ->
     super note
 
@@ -34,8 +36,6 @@ class Pick extends HandlerBase
     if element.node.id isnt 'canvas'
       @setFocus element
 
-      element.drag()
-
   onMove: (event) ->
     event.preventDefault()
 
@@ -43,10 +43,23 @@ class Pick extends HandlerBase
     event.preventDefault()
 
   setFocus: (element) ->
-    # @focus.set element
+    @focus.set element
     @focusedElements.push element
 
     @focus.setVisibility true
+
+    element.drag()
+    element.drag @moveFocus.bind(@), @moveFocusStart.bind(@), @moveFocusEnd.bind(@)
+
+  moveFocusStart: (x, y, event) ->
+    @focusPosition = @focus.getPosition()
+
+  moveFocus: (dx, dy) ->
+    [x, y] = @focusPosition
+    @focus.setPosition x + dx, y + dy
+
+  moveFocusEnd: (event) ->
+    @focusPosition = null
 
   removeFocusAll: ->
     for element in @focusedElements
