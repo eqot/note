@@ -6,8 +6,14 @@ class Pick extends HandlerBase
     RELEASE: 0
     PRESS: 1
 
+  focus: null
+  focusedElements: null
+
   constructor: (note) ->
     super note
+
+    @focus = new Focus @note
+    @focusedElements = []
 
     @state = @State.RELEASE
 
@@ -16,7 +22,10 @@ class Pick extends HandlerBase
 
     [x, y] = @getPoint event
 
-    console.log x, y
+    element = @note.pick x, y
+
+    @focus.set element
+    @focusedElements.push element
 
   onMove: (event) ->
     event.preventDefault()
