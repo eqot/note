@@ -17,6 +17,11 @@ class Pick extends HandlerBase
 
     @state = @State.RELEASE
 
+  deactivate: ->
+    super()
+
+    @removeFocusAll()
+
   onDown: (event) ->
     event.preventDefault()
 
@@ -29,6 +34,8 @@ class Pick extends HandlerBase
     if element.node.id isnt 'canvas'
       @setFocus element
 
+      element.drag()
+
   onMove: (event) ->
     event.preventDefault()
 
@@ -36,12 +43,15 @@ class Pick extends HandlerBase
     event.preventDefault()
 
   setFocus: (element) ->
-    @focus.set element
+    # @focus.set element
     @focusedElements.push element
 
     @focus.setVisibility true
 
   removeFocusAll: ->
+    for element in @focusedElements
+      element.undrag()
+
     @focusedElements = []
 
     @focus.setVisibility false

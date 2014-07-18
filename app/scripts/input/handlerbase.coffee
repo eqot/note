@@ -29,13 +29,13 @@ class HandlerBase
     @removeAllListeners()
 
   addListener: (target, event, listener) ->
-    target.addEventListener event, listener
+    target.addEventListener event, listener, true
 
     @listeners.push [target, event, listener]
 
   removeAllListeners: ->
     for [target, event, listener] in @listeners
-      target.removeEventListener event, listener
+      target.removeEventListener event, listener, true
 
   getPoint: (event) ->
     if event.touches?
