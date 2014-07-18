@@ -21,17 +21,30 @@ class Pick extends HandlerBase
     event.preventDefault()
 
     [x, y] = @getPoint event
-
     element = @note.pick x, y
 
-    @focus.set element
-    @focusedElements.push element
+    @removeFocusAll()
+
+    # Set focus if any elements were picked
+    if element.node.id isnt 'canvas'
+      @setFocus element
 
   onMove: (event) ->
     event.preventDefault()
 
   onUp: (event) ->
     event.preventDefault()
+
+  setFocus: (element) ->
+    @focus.set element
+    @focusedElements.push element
+
+    @focus.setVisibility true
+
+  removeFocusAll: ->
+    @focusedElements = []
+
+    @focus.setVisibility false
 
 
 window.Pick = Pick

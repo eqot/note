@@ -10,8 +10,9 @@ class Focus
   constructor: (note) ->
     @note = note
 
-    @element = @note.drawRectangle 100, 100, 200, 200
+    @element = @note.drawRectangle 0, 0, 0, 0
     @element.addClass 'focus'
+    @setVisibility false
 
     @layer = @note.getNewLayer()
     @layer.append @element
@@ -24,6 +25,12 @@ class Focus
       y: y
       width: w
       height: h
+
+  setVisibility: (isVisible) ->
+    if isVisible
+      @element.removeClass 'hide'
+    else
+      @element.addClass 'hide'
 
 
 window.Focus = Focus
