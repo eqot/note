@@ -26,6 +26,7 @@
     <div id="buttons">
       <button id="pick">P</button>
       <button id="freehand">F</button>
+      <button id="rectangle">R</button>
     </div>
 
 
@@ -63,10 +64,12 @@
         <!-- endbuild -->
 
         <!-- build:js({app,.tmp}) scripts/note.js -->
-        <script src="scripts/eventhandler.js"></script>
-        <script src="scripts/event.js"></script>
-        <script src="scripts/pick.js"></script>
+        <script src="scripts/input/handlerbase.js"></script>
+        <script src="scripts/input/pick.js"></script>
+        <script src="scripts/input/freehand.js"></script>
+        <script src="scripts/input/rectangle.js"></script>
         <script src="scripts/note.js"></script>
+        <script src="scripts/focus.js"></script>
         <!-- endbuild -->
 
         <!-- build:js({app,.tmp}) scripts/main.js -->

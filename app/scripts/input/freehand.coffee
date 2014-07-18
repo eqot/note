@@ -1,6 +1,6 @@
 'use strict'
 
-class Event extends EventHandler
+class Freehand extends HandlerBase
 
   State:
     RELEASE: 0
@@ -16,7 +16,9 @@ class Event extends EventHandler
     @state = @State.RELEASE
 
   onDown: (event) ->
-    {x, y} = event
+    event.preventDefault()
+
+    [x, y] = @getPoint event
 
     @stroke = []
     @stroke.push x, y
@@ -29,8 +31,10 @@ class Event extends EventHandler
     @state = @State.PRESS
 
   onMove: (event) ->
+    event.preventDefault()
+
     if @state is @State.PRESS
-      {x, y} = event
+      [x, y] = @getPoint event
 
       @note.drawLine @prevX, @prevY, x, y
 
@@ -40,6 +44,8 @@ class Event extends EventHandler
       @prevY = y
 
   onUp: (event) ->
+    event.preventDefault()
+
     # console.log @stroke
     @note.drawPolyline @stroke
 
@@ -49,4 +55,4 @@ class Event extends EventHandler
     @state = @State.RELEASE
 
 
-window.Event = Event
+window.Freehand = Freehand

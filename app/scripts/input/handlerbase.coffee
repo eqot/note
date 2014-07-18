@@ -1,6 +1,6 @@
 'use strict'
 
-class EventHandler
+class HandlerBase
 
   state: null
 
@@ -21,6 +21,10 @@ class EventHandler
     @addListener @dom, 'mousemove', @onMove?.bind @
     @addListener @dom, 'mouseup',   @onUp?.bind @
 
+    @addListener @dom, 'touchstart', @onDown?.bind @
+    @addListener @dom, 'touchmove',  @onMove?.bind @
+    @addListener @dom, 'touchend',   @onUp?.bind @
+
   deactivate: ->
     @removeAllListeners()
 
@@ -33,4 +37,11 @@ class EventHandler
     for [target, event, listener] in @listeners
       target.removeEventListener event, listener
 
-window.EventHandler = EventHandler
+  getPoint: (event) ->
+    if event.touches?
+      return [event.touches[0].clientX, event.touches[0].clientY]
+    else
+      return [event.x, event.y]
+
+
+window.HandlerBase = HandlerBase
