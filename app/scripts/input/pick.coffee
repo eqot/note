@@ -25,7 +25,7 @@ class Pick extends HandlerBase
     @removeFocusAll()
 
   onDown: (event) ->
-    event.preventDefault()
+    event.preventDefault?()
 
     [x, y] = @getPoint event
     element = @note.pick x, y
@@ -37,10 +37,10 @@ class Pick extends HandlerBase
       @setFocus element
 
   onMove: (event) ->
-    event.preventDefault()
+    event.preventDefault?()
 
   onUp: (event) ->
-    event.preventDefault()
+    event.preventDefault?()
 
   setFocus: (element) ->
     @focus.set element

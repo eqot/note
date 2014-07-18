@@ -17,14 +17,14 @@ class Rectangle extends HandlerBase
     @state = @State.RELEASE
 
   onDown: (event) ->
-    event.preventDefault()
+    event.preventDefault?()
 
     [@startX, @startY] = @getPoint event
 
     @state = @State.PRESS
 
   onMove: (event) ->
-    event.preventDefault()
+    event.preventDefault?()
 
     @rectangle?.remove()
 
@@ -34,7 +34,7 @@ class Rectangle extends HandlerBase
       @rectangle = @note.drawRectangle @startX, @startY, x, y
 
   onUp: (event) ->
-    event.preventDefault()
+    event.preventDefault?()
 
     @rectangle = null
     @startX = @startY = null

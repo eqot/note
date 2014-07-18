@@ -16,7 +16,7 @@ class Freehand extends HandlerBase
     @state = @State.RELEASE
 
   onDown: (event) ->
-    event.preventDefault()
+    event.preventDefault?()
 
     [x, y] = @getPoint event
 
@@ -31,7 +31,7 @@ class Freehand extends HandlerBase
     @state = @State.PRESS
 
   onMove: (event) ->
-    event.preventDefault()
+    event.preventDefault?()
 
     if @state is @State.PRESS
       [x, y] = @getPoint event
@@ -44,7 +44,7 @@ class Freehand extends HandlerBase
       @prevY = y
 
   onUp: (event) ->
-    event.preventDefault()
+    event.preventDefault?()
 
     # console.log @stroke
     @note.drawPolyline @stroke
