@@ -19,6 +19,7 @@ html, body {
 
 .focus {
   stroke: red;
+  fill-opacity: 0;
 
   &.hide {
     visibility: hidden;
