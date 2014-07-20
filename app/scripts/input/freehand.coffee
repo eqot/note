@@ -11,6 +11,8 @@ class Freehand extends HandlerBase
   stroke: null
   path: null
 
+  tmpStroke: null
+
   constructor: (note) ->
     super note
 
@@ -29,7 +31,7 @@ class Freehand extends HandlerBase
     @prevX = x
     @prevY = y
 
-    @note.startLine()
+    @tmpStroke = @note.getNewLayer()
 
     @state = @State.PRESS
 
@@ -39,7 +41,8 @@ class Freehand extends HandlerBase
     if @state is @State.PRESS
       [x, y] = @getPoint event
 
-      @note.drawLine @prevX, @prevY, x, y
+      line = @note.drawLine @prevX, @prevY, x, y
+      @tmpStroke.append line
 
       @stroke.push x, y
 
@@ -55,8 +58,7 @@ class Freehand extends HandlerBase
     # @note.drawPolyline @stroke
     @note.drawPath @path
 
-    line = @note.endLine()
-    line.remove()
+    @tmpStroke.remove()
 
     @state = @State.RELEASE
 
