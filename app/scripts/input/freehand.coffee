@@ -37,9 +37,7 @@ class Freehand extends HandlerBase
       @prevX = x
       @prevY = y
 
-  onUp: (event) ->
-    event.preventDefault?()
-
+  onUp: ->
     @state = @State.RELEASE
 
 

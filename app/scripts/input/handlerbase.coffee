@@ -51,16 +51,14 @@ class HandlerBase
       y: y / @SCALE
     }
 
-  onNativeMove: (events) ->
-    while events.length > 0
-      @event =
-        x: events.shift() / @SCALE
-        y: events.shift() / @SCALE
-
-      @onMove? @event
+  onNativeMove: (x, y) ->
+    @onMove? {
+      x: x / @SCALE
+      y: y / @SCALE
+    }
 
   onNativeUp: ->
-    @onUp? @event
+    @onUp?()
 
 
 window.HandlerBase = HandlerBase
