@@ -48,7 +48,9 @@ class HandlerBase
 
   onNativeMove: (events) ->
     while events.length > 0
-      @event = {events.shift(), events.shift()}
+      @event =
+        x: events.shift()
+        y: events.shift()
 
       @onMove? @event
 

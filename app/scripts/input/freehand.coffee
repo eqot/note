@@ -9,6 +9,7 @@ class Freehand extends HandlerBase
   prevX: null
   prevY: null
   stroke: null
+  path: null
 
   constructor: (note) ->
     super note
@@ -22,6 +23,8 @@ class Freehand extends HandlerBase
 
     @stroke = []
     @stroke.push x, y
+
+    @path = "M#{x},#{y}"
 
     @prevX = x
     @prevY = y
@@ -40,6 +43,8 @@ class Freehand extends HandlerBase
 
       @stroke.push x, y
 
+      @path += " Q#{@prevX},#{@prevY} #{(x + @prevX) / 2},#{(y + @prevY) / 2}"
+
       @prevX = x
       @prevY = y
 
@@ -47,7 +52,8 @@ class Freehand extends HandlerBase
     event.preventDefault?()
 
     # console.log @stroke
-    @note.drawPolyline @stroke
+    # @note.drawPolyline @stroke
+    @note.drawPath @path
 
     line = @note.endLine()
     line.remove()

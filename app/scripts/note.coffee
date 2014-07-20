@@ -48,6 +48,15 @@ class Note
 
     @layer.append line
 
+  drawPath: (path) ->
+    path = @s.path path
+    path.attr
+      stroke: @strokeColor
+      strokeWidth: @strokeWidth
+      strokeLinecap: 'round'
+      strokeLinejoin: 'round'
+      fill: 'none'
+
   drawRectangle: (x0, y0, x1, y1) ->
     [x, w] = if x0 < x1 then [x0, x1 - x0] else [x1, x0 - x1]
     [y, h] = if y0 < y1 then [y0, y1 - y0] else [y1, y0 - y1]
