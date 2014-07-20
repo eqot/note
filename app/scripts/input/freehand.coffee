@@ -23,8 +23,8 @@ class Freehand extends HandlerBase
 
     [x, y] = @getPoint event
 
-    @stroke = []
-    @stroke.push x, y
+    # @stroke = []
+    # @stroke.push x, y
 
     @path = "M#{x},#{y}"
 
@@ -41,11 +41,6 @@ class Freehand extends HandlerBase
     if @state is @State.PRESS
       [x, y] = @getPoint event
 
-      # line = @note.drawLine @prevX, @prevY, x, y
-      # @tmpStroke.append line
-
-      @stroke.push x, y
-
       @path += " Q#{@prevX},#{@prevY} #{(x + @prevX) / 2},#{(y + @prevY) / 2}"
       line = @note.drawPath @path
       @tmpStroke.append line
@@ -56,8 +51,6 @@ class Freehand extends HandlerBase
   onUp: (event) ->
     event.preventDefault?()
 
-    # console.log @stroke
-    # @note.drawPolyline @stroke
     @note.drawPath @path
 
     @tmpStroke.remove()
