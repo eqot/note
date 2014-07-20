@@ -23,19 +23,11 @@ class Note
   getNewLayer: ->
     return @s.g()
 
-  startLine: ->
-    @group = @s.g()
-
   drawLine: (x0, y0, x1, y1) ->
     line = @s.line x0, y0, x1, y1
     line.attr
       stroke: @strokeColor
       strokeWidth: @strokeWidth
-
-    @group.append line
-
-  endLine: ->
-    return @group
 
   drawPolyline: (stroke) ->
     line = @s.polyline stroke
@@ -47,6 +39,15 @@ class Note
       fill: 'none'
 
     @layer.append line
+
+  drawPath: (path) ->
+    path = @s.path path
+    path.attr
+      stroke: @strokeColor
+      strokeWidth: @strokeWidth
+      strokeLinecap: 'round'
+      strokeLinejoin: 'round'
+      fill: 'none'
 
   drawRectangle: (x0, y0, x1, y1) ->
     [x, w] = if x0 < x1 then [x0, x1 - x0] else [x1, x0 - x1]

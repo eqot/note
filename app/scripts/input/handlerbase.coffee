@@ -43,5 +43,19 @@ class HandlerBase
     else
       return [event.x, event.y]
 
+  onNativeDown: (x, y) ->
+    @onDown? {x, y}
+
+  onNativeMove: (events) ->
+    while events.length > 0
+      @event =
+        x: events.shift()
+        y: events.shift()
+
+      @onMove? @event
+
+  onNativeUp: ->
+    @onUp? @event
+
 
 window.HandlerBase = HandlerBase

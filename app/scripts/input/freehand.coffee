@@ -9,6 +9,9 @@ class Freehand extends HandlerBase
   prevX: null
   prevY: null
   stroke: null
+  path: null
+
+  tmpStroke: null
 
   constructor: (note) ->
     super note
@@ -16,41 +19,48 @@ class Freehand extends HandlerBase
     @state = @State.RELEASE
 
   onDown: (event) ->
-    event.preventDefault()
+    event.preventDefault?()
 
     [x, y] = @getPoint event
 
     @stroke = []
     @stroke.push x, y
 
+    @path = "M#{x},#{y}"
+
     @prevX = x
     @prevY = y
 
-    @note.startLine()
+    @tmpStroke = @note.getNewLayer()
 
     @state = @State.PRESS
 
   onMove: (event) ->
-    event.preventDefault()
+    event.preventDefault?()
 
     if @state is @State.PRESS
       [x, y] = @getPoint event
 
-      @note.drawLine @prevX, @prevY, x, y
+      # line = @note.drawLine @prevX, @prevY, x, y
+      # @tmpStroke.append line
 
       @stroke.push x, y
+
+      @path += " Q#{@prevX},#{@prevY} #{(x + @prevX) / 2},#{(y + @prevY) / 2}"
+      line = @note.drawPath @path
+      @tmpStroke.append line
 
       @prevX = x
       @prevY = y
 
   onUp: (event) ->
-    event.preventDefault()
+    event.preventDefault?()
 
     # console.log @stroke
-    @note.drawPolyline @stroke
+    # @note.drawPolyline @stroke
+    @note.drawPath @path
 
-    line = @note.endLine()
-    line.remove()
+    @tmpStroke.remove()
 
     @state = @State.RELEASE
 
