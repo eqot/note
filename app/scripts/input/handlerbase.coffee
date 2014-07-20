@@ -2,6 +2,8 @@
 
 class HandlerBase
 
+  SCALE: 64
+
   state: null
 
   note: null
@@ -44,13 +46,16 @@ class HandlerBase
       return [event.x, event.y]
 
   onNativeDown: (x, y) ->
-    @onDown? {x, y}
+    @onDown? {
+      x: x / @SCALE
+      y: y / @SCALE
+    }
 
   onNativeMove: (events) ->
     while events.length > 0
       @event =
-        x: events.shift()
-        y: events.shift()
+        x: events.shift() / @SCALE
+        y: events.shift() / @SCALE
 
       @onMove? @event
 
