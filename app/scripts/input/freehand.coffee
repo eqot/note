@@ -41,12 +41,14 @@ class Freehand extends HandlerBase
     if @state is @State.PRESS
       [x, y] = @getPoint event
 
-      line = @note.drawLine @prevX, @prevY, x, y
-      @tmpStroke.append line
+      # line = @note.drawLine @prevX, @prevY, x, y
+      # @tmpStroke.append line
 
       @stroke.push x, y
 
       @path += " Q#{@prevX},#{@prevY} #{(x + @prevX) / 2},#{(y + @prevY) / 2}"
+      line = @note.drawPath @path
+      @tmpStroke.append line
 
       @prevX = x
       @prevY = y
