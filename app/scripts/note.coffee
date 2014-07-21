@@ -7,7 +7,7 @@ class Note
   layer: null
 
   strokeColor: '#000000'
-  strokeWidth: 1
+  strokeWidth: 2
   fillColor: '#ffffff'
 
   group: null

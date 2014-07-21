@@ -6,12 +6,10 @@ class Freehand extends HandlerBase
     RELEASE: 0
     PRESS: 1
 
+  pathNode: null
+
   prevX: null
   prevY: null
-  stroke: null
-  path: null
-
-  tmpStroke: null
 
   constructor: (note) ->
     super note
@@ -21,17 +19,10 @@ class Freehand extends HandlerBase
   onDown: (event) ->
     event.preventDefault?()
 
-    [x, y] = @getPoint event
+    [@prevX, @prevY] = @getPoint event
 
-    @stroke = []
-    @stroke.push x, y
-
-    @path = "M#{x},#{y}"
-
-    @prevX = x
-    @prevY = y
-
-    @tmpStroke = @note.getNewLayer()
+    path = @note.drawPath "M#{@prevX},#{@prevY}"
+    @pathNode = path.node
 
     @state = @State.PRESS
 
@@ -41,27 +32,12 @@ class Freehand extends HandlerBase
     if @state is @State.PRESS
       [x, y] = @getPoint event
 
-      # line = @note.drawLine @prevX, @prevY, x, y
-      # @tmpStroke.append line
-
-      @stroke.push x, y
-
-      @path += " Q#{@prevX},#{@prevY} #{(x + @prevX) / 2},#{(y + @prevY) / 2}"
-      line = @note.drawPath @path
-      @tmpStroke.append line
+      @pathNode.pathSegList.appendItem @pathNode.createSVGPathSegCurvetoQuadraticAbs (x + @prevX) / 2, (y + @prevY) / 2, @prevX, @prevY
 
       @prevX = x
       @prevY = y
 
-  onUp: (event) ->
-    event.preventDefault?()
-
-    # console.log @stroke
-    # @note.drawPolyline @stroke
-    @note.drawPath @path
-
-    @tmpStroke.remove()
-
+  onUp: ->
     @state = @State.RELEASE
 
 
