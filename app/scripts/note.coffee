@@ -63,6 +63,9 @@ class Note
 
     return rectangle
 
+  marker: (x, y, width, height, refX, refY) ->
+    return @s.marker x, y, width, height, refX, refY
+
   pick: (x, y) ->
     return Snap.getElementByPoint(x, y)
 

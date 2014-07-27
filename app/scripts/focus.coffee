@@ -2,9 +2,15 @@
 
 class Focus
 
+  FOCUS_STROKES: [
+    [0, 0, 50, 0, 100, 0],
+    [100, 0, 100, 50, 100, 100],
+    [100, 100, 50, 100, 0, 100],
+    [0, 100, 0, 50, 0, 0]
+  ]
+
   note: null
 
-  element: null
   layer: null
 
   position: null
@@ -12,17 +18,32 @@ class Focus
   constructor: (note) ->
     @note = note
 
-    @element = @note.drawRectangle 0, 0, 0, 0
-    @element.addClass 'focus'
-    @element.attr
-      fill: 'none'
-    @setVisibility false
+    rectangle = @note.drawRectangle 0, 0, 10, 10
+    marker = rectangle.marker 0, 0, 10, 10, 5, 5
+    marker.attr
+      id: 'rect'
+      overflow: 'visible'
+      markerUnits: 'userSpaceOnUse'
+      orient: '0'
+    marker.toDefs()
 
     @layer = @note.getNewLayer()
-    @layer.append @element
+    @layer.addClass 'focus'
+    for stroke in @FOCUS_STROKES
+      element = @note.drawPolyline stroke
+      element.attr
+        fill: 'none'
+      element.node.setAttribute 'marker-start', 'url("#rect")'
+      element.node.setAttribute 'marker-mid', 'url("#rect")'
+
+      @layer.append element
+
+    @setVisibility true
 
   set: (target) ->
     {x, y, w, h} = target.getBBox()
+
+    console.log @layer
 
     @element.attr
       x: x
@@ -44,9 +65,9 @@ class Focus
 
   setVisibility: (isVisible) ->
     if isVisible
-      @element.removeClass 'hide'
+      @layer.removeClass 'hide'
     else
-      @element.addClass 'hide'
+      @layer.addClass 'hide'
 
 
 window.Focus = Focus
