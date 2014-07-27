@@ -14,7 +14,7 @@ class Pick extends HandlerBase
   constructor: (note) ->
     super note
 
-    @focus = new Focus @note
+    @focus = new Focus()
     @focusedElements = []
 
     @state = @State.RELEASE
