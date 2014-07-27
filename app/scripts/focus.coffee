@@ -2,40 +2,27 @@
 
 class Focus
 
-  note: null
-
   element: null
-  layer: null
 
   position: null
 
-  constructor: (note) ->
-    @note = note
-
-    @element = @note.drawRectangle 0, 0, 0, 0
-    @element.addClass 'focus'
-    @element.attr
-      fill: 'none'
+  constructor: ->
+    @element = document.querySelector '#focus'
     @setVisibility false
-
-    @layer = @note.getNewLayer()
-    @layer.append @element
 
   set: (target) ->
     {x, y, w, h} = target.getBBox()
 
-    @element.attr
-      x: x
-      y: y
-      width: w
-      height: h
+    @element.style.left = x + 'px'
+    @element.style.top = y + 'px'
+    @element.style.width = w + 'px'
+    @element.style.height = h + 'px'
 
     @position = [x, y]
 
   setPosition: (x, y) ->
-    @element.attr
-      x: x
-      y: y
+    @element.style.left = x + 'px'
+    @element.style.top = y + 'px'
 
     @position = [x, y]
 
@@ -44,9 +31,9 @@ class Focus
 
   setVisibility: (isVisible) ->
     if isVisible
-      @element.removeClass 'hide'
+      @element.classList.remove 'hide'
     else
-      @element.addClass 'hide'
+      @element.classList.add 'hide'
 
 
 window.Focus = Focus
