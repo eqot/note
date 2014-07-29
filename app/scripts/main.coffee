@@ -15,7 +15,7 @@ class NoteCore
     @handlers['rectangle'] = new Rectangle @note
 
     for button in document.querySelectorAll '#buttons button'
-      button.addEventListener 'click', @onClick.bind @
+      button.addEventListener 'click', @onClick.bind(@)
 
     @setMode 'freehand'
     # @setMode 'rectangle'
