@@ -21,22 +21,21 @@
     <![endif]-->
 
 
-    <svg id="canvas"></svg>
-
-    <div id="focus"></div>
-
-    <div id="buttons">
-      <button id="pick">
+    <div class="btn-group" id="buttons">
+      <button type="button" class="btn btn-default" id="pick">
         <span class="glyphicon glyphicon-hand-up"></span>
       </button>
-      <button id="freehand">
+      <button type="button" class="btn btn-default" id="freehand">
         <span class="glyphicon glyphicon-pencil"></span>
       </button>
-      <button id="rectangle">
+      <button type="button" class="btn btn-default" id="rectangle">
         <span class="glyphicon glyphicon-stop"></span>
       </button>
     </div>
 
+    <svg id="canvas"></svg>
+
+    <div id="focus"></div>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
