@@ -4,8 +4,9 @@ class NoteCore
 
   note: null
 
+  elements: {}
   handlers: {}
-  prevHandler: null
+  mode: null
 
   constructor: ->
     @note = new Note '#canvas'
@@ -15,7 +16,8 @@ class NoteCore
     @handlers['rectangle'] = new Rectangle @note
 
     for button in document.querySelectorAll '#buttons button'
-      button.addEventListener 'click', @onClick.bind @
+      @elements[button.id] = button
+      button.addEventListener 'click', @onClick.bind(@)
 
     @setMode 'freehand'
     # @setMode 'rectangle'
@@ -24,17 +26,22 @@ class NoteCore
     @setMode event.target.id
 
   setMode: (mode) ->
-    @prevHandler?.deactivate()
+    if @mode?
+      @elements[@mode].classList.remove 'active'
+      @handlers[@mode].deactivate()
 
-    handler = @handlers[mode]
-    handler?.activate()
+    @mode = mode
 
-    window.native =
-      mouseDown: handler.onNativeDown.bind handler
-      mouseMove: handler.onNativeMove.bind handler
-      mouseUp:   handler.onNativeUp.bind handler
+    @elements[@mode].classList.add 'active'
 
-    @prevHandler = handler
+    handler = @handlers[@mode]
+    if handler?
+      handler.activate()
+
+      window.native =
+        mouseDown: handler.onNativeDown.bind handler
+        mouseMove: handler.onNativeMove.bind handler
+        mouseUp:   handler.onNativeUp.bind handler
 
 
 core = new NoteCore()
