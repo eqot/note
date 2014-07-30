@@ -27,20 +27,38 @@ class Pick extends HandlerBase
   onDown: (event) ->
     event.preventDefault?()
 
-    [x, y] = @getPoint event
-    element = @note.pick x, y
-
     @removeFocusAll()
+
+    [x, y] = @getPoint event
+    @focusPosition = [x, y]
+
+    element = @note.pick x, y
 
     # Set focus if any elements were picked
     if element.node.id isnt 'canvas'
       @setFocus element
 
+    @focus.setVisibility true
+
+    @state = @State.PRESS
+
   onMove: (event) ->
     event.preventDefault?()
 
+    if @state is @State.PRESS
+      [x0, y0] = @focusPosition
+      [x1, y1] = @getPoint event
+
+      [x, w] = if x0 < x1 then [x0, x1 - x0] else [x1, x0 - x1]
+      [y, h] = if y0 < y1 then [y0, y1 - y0] else [y1, y0 - y1]
+
+      @focus.setPosition x, y
+      @focus.setSize w, h
+
   onUp: (event) ->
     event.preventDefault?()
+
+    @state = @State.RELEASE
 
   setFocus: (element) ->
     @focus.set element

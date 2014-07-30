@@ -29,6 +29,10 @@ class Focus
   getPosition: ->
     return @position
 
+  setSize: (width, height) ->
+    @element.style.width = width + 'px'
+    @element.style.height = height + 'px'
+
   setVisibility: (isVisible) ->
     if isVisible
       @element.classList.remove 'hide'
