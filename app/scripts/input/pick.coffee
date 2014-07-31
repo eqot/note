@@ -60,6 +60,17 @@ class Pick extends HandlerBase
 
     @state = @State.RELEASE
 
+    focusBBox = @focus.getBBox()
+    if not focusBBox?
+      return
+
+    focusedElements = []
+    for element in @note.getAllElements()
+      if Snap.path.isBBoxIntersect focusBBox, element.getBBox()
+        focusedElements.push element
+
+    console.log focusedElements
+
   setFocus: (element) ->
     @focus.set element
     @focusedElements.push element
