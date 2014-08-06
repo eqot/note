@@ -6,6 +6,7 @@ class NoteCore
 
   elements: {}
   handlers: {}
+  states: {}
   mode: null
 
   constructor: ->
@@ -15,6 +16,8 @@ class NoteCore
     @handlers['freehand'] = new Freehand @note
     @handlers['rectangle'] = new Rectangle @note
 
+    @states['penwidth'] = new PenWidth @note
+
     for button in document.querySelectorAll '#buttons button'
       @elements[button.id] = button
       button.addEventListener 'click', @onClick.bind(@)
@@ -23,10 +26,15 @@ class NoteCore
     # @setMode 'rectangle'
 
   onClick: (event) ->
-    @setMode event.target.id
+    id = event.target.id
+
+    if @states[id]?
+      @setState id
+    else
+      @setMode id
 
   setMode: (mode) ->
-    if @mode?
+    if @mode? and @mode.length > 0
       @elements[@mode].classList.remove 'active'
       @handlers[@mode].deactivate()
 
@@ -43,5 +51,7 @@ class NoteCore
         mouseMove: handler.onNativeMove.bind handler
         mouseUp:   handler.onNativeUp.bind handler
 
+  setState: (state) ->
+    # console.log state
 
 core = new NoteCore()
