@@ -23,6 +23,9 @@ class Note
   getNewLayer: ->
     return @s.g()
 
+  setStrokeWidth: (width) ->
+    @strokeWidth = width
+
   drawLine: (x0, y0, x1, y1) ->
     line = @s.line x0, y0, x1, y1
     line.attr
