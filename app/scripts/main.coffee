@@ -20,8 +20,7 @@ class NoteCore
 
     for button in document.querySelectorAll '#buttons button'
       @elements[button.id] = button
-      if @handlers[button.id]?
-        button.addEventListener 'click', @onClick.bind(@)
+      button.addEventListener 'click', @onClick.bind(@)
 
     @setMode 'freehand'
     # @setMode 'rectangle'
