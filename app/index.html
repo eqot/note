@@ -13,6 +13,7 @@
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="bower_components/colpick/css/colpick.css">
     <!-- endbuild -->
   </head>
   <body>
@@ -46,6 +47,9 @@
             <li><a id="4">4</a></li>
           </ul>
         </div>
+        <button type="button" class="btn btn-default" id="colorpicker">
+          <span class="glyphicon glyphicon-stop"></span>
+        </button>
       </div>
     </div>
 
@@ -84,6 +88,8 @@
         <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/scrollspy.js"></script>
         <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/collapse.js"></script>
         <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tab.js"></script>
+
+        <script src="bower_components/colpick/js/colpick.js"></script>
         <!-- endbuild -->
 
         <!-- build:js({app,.tmp}) scripts/note.js -->
@@ -92,6 +98,7 @@
         <script src="scripts/input/freehand.js"></script>
         <script src="scripts/input/rectangle.js"></script>
         <script src="scripts/state/penwidth.js"></script>
+        <script src="scripts/state/colorpicker.js"></script>
         <script src="scripts/note.js"></script>
         <script src="scripts/focus.js"></script>
         <!-- endbuild -->

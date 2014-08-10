@@ -17,6 +17,7 @@ class NoteCore
     @handlers['rectangle'] = new Rectangle @note
 
     @states['penwidth'] = new PenWidth @note
+    @states['colorpicker'] = new ColorPicker @note
 
     for button in document.querySelectorAll '#buttons button'
       @elements[button.id] = button
