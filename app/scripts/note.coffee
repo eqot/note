@@ -23,6 +23,9 @@ class Note
   getNewLayer: ->
     return @s.g()
 
+  setStrokeColor: (color) ->
+    @strokeColor = color
+
   setStrokeWidth: (width) ->
     @strokeWidth = width
 
