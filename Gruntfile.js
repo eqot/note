@@ -137,6 +137,23 @@ module.exports = function (grunt) {
       ]
     },
 
+    coffee_jshint: {
+      options: {
+        globals: [
+          'window', 'document', 'console',
+          '$', 'Snap',
+          'Note', 'Focus', 'HandlerBase', 'Pick', 'Freehand', 'Rectangle', 'PenWidth', 'ColorPicker'
+        ]
+      },
+      target: {
+        files: {
+          code: [
+            '<%= config.app %>/scripts/{,**/}*.coffee'
+          ]
+        }
+      }
+    },
+
     // Mocha testing framework configuration options
     mocha: {
       all: {

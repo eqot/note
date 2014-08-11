@@ -1,6 +1,5 @@
-'use strict'
-
 class Pick extends HandlerBase
+  'use strict'
 
   State:
     RELEASE: 0

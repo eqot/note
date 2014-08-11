@@ -1,6 +1,5 @@
-'use strict'
-
 class Rectangle extends HandlerBase
+  'use strict'
 
   State:
     RELEASE: 0

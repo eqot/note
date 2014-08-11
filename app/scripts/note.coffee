@@ -13,7 +13,7 @@ class Note
   group: null
 
   constructor: (target) ->
-    @s = Snap target
+    @s = new Snap target
 
     @layer = @getNewLayer()
 
