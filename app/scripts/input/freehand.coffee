@@ -1,6 +1,5 @@
-'use strict'
-
 class Freehand extends HandlerBase
+  'use strict'
 
   State:
     RELEASE: 0
