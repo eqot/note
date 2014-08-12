@@ -3,12 +3,14 @@
 class Focus
 
   element: null
+  @offsetY: 0
 
   position: null
   size: null
 
   constructor: ->
     @element = document.querySelector '#focus'
+    @offsetY = (document.querySelector '#canvas').offsetTop
     @setVisibility false
 
   set: (target) ->
@@ -19,7 +21,7 @@ class Focus
 
   setPosition: (x, y) ->
     @element.style.left = x + 'px'
-    @element.style.top = y + 'px'
+    @element.style.top = y + @offsetY + 'px'
 
     @position = [x, y]
 
