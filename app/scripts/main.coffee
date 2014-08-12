@@ -2,6 +2,7 @@
 
 class NoteCore
 
+  canvas: null
   note: null
 
   elements: {}
@@ -10,6 +11,11 @@ class NoteCore
   mode: null
 
   constructor: ->
+    @canvas = $('#canvas')
+    @onResize()
+    $(window).resize =>
+      @onResize()
+
     @note = new Note '#canvas'
 
     @handlers['pick'] = new Pick @note
@@ -25,6 +31,13 @@ class NoteCore
 
     @setMode 'freehand'
     # @setMode 'rectangle'
+
+  onResize: ->
+    bodyHeight = $('body').height()
+    toolsHeight = $('#tools').height()
+
+    @canvas
+      .attr 'height', bodyHeight - toolsHeight - 6
 
   onClick: (event) ->
     id = event.target.id
