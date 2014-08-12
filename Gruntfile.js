@@ -36,7 +36,7 @@ module.exports = function (grunt) {
       },
       coffee: {
         files: ['<%= config.app %>/scripts/{,*/}*.{coffee,litcoffee,coffee.md}'],
-        tasks: ['coffee:dist']
+        tasks: ['coffee_jshint', 'coffee:dist']
       },
       coffeeTest: {
         files: ['test/spec/{,*/}*.{coffee,litcoffee,coffee.md}'],
