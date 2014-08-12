@@ -8,6 +8,7 @@ class HandlerBase
 
   note: null
   dom: null
+  offsetY: 0
 
   listeners: null
 
@@ -15,6 +16,7 @@ class HandlerBase
     @note = note
 
     @dom = @note.getDom()
+    @offsetY = @dom.offsetTop
 
     @listeners = []
 
@@ -41,9 +43,9 @@ class HandlerBase
 
   getPoint: (event) ->
     if event.touches?
-      return [event.touches[0].clientX, event.touches[0].clientY]
+      return [event.touches[0].clientX, event.touches[0].clientY - @offsetY]
     else
-      return [event.x, event.y]
+      return [event.x, event.y - @offsetY]
 
   onNativeDown: (x, y) ->
     @onDown? {
