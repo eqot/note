@@ -1,6 +1,6 @@
 'use strict'
 
-class ColorPicker
+class PenColor
 
   note: null
   element: null
@@ -8,7 +8,7 @@ class ColorPicker
   constructor: (note) ->
     @note = note
 
-    @element = $('#colorpicker')
+    @element = $('#pencolor')
     @element.colpick
       color:
         h: 0
@@ -26,4 +26,4 @@ class ColorPicker
     @element.colpickHide()
 
 
-window.ColorPicker = ColorPicker
+window.PenColor = PenColor
