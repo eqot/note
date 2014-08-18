@@ -6,8 +6,8 @@ class Note
 
   layer: null
 
-  strokeColor: '#000000'
   strokeWidth: 2
+  strokeColor: '#000000'
   fillColor: '#ffffff'
 
   group: null
@@ -23,14 +23,14 @@ class Note
   getNewLayer: ->
     return @s.g()
 
+  setStrokeWidth: (width) ->
+    @strokeWidth = width
+
   setStrokeColor: (color) ->
     @strokeColor = color
 
   setFillColor: (color) ->
     @fillColor = color
-
-  setStrokeWidth: (width) ->
-    @strokeWidth = width
 
   drawLine: (x0, y0, x1, y1) ->
     line = @s.line x0, y0, x1, y1
