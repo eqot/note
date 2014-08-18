@@ -26,6 +26,9 @@ class Note
   setStrokeColor: (color) ->
     @strokeColor = color
 
+  setFillColor: (color) ->
+    @fillColor = color
+
   setStrokeWidth: (width) ->
     @strokeWidth = width
 

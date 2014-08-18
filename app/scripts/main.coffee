@@ -24,6 +24,7 @@ class NoteCore
 
     @states['penwidth'] = new PenWidth @note
     @states['pencolor'] = new PenColor @note
+    @states['fillcolor'] = new FillColor @note
 
     for button in document.querySelectorAll '#buttons button'
       @elements[button.id] = button
