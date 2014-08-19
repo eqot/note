@@ -16,6 +16,9 @@ class PenWidth
 
     @element = document.querySelector '#penwidthvalue'
 
+    $('#penwidth-dropdown').on 'hidden.bs.dropdown', ->
+      $('#penwidth').blur()
+
   onClick: (event) ->
     penWidth = event.target.id
 
