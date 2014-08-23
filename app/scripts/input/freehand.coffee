@@ -39,5 +39,10 @@ class Freehand extends HandlerBase
   onUp: ->
     @state = @State.RELEASE
 
+    command = new CommandDrawObject 'path', @pathNode.pathSegList, @note.getState()
+
+    @note.commandStack.add command
+    console.log @note.commandStack
+
 
 window.Freehand = Freehand
