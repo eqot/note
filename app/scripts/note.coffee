@@ -12,10 +12,14 @@ class Note
 
   group: null
 
+  commandStack: null
+
   constructor: (target) ->
     @s = new Snap target
 
     @layer = @getNewLayer()
+
+    @commandStack = new CommandStack()
 
   getDom: ->
     @s.node
@@ -49,11 +53,11 @@ class Note
 
     @layer.append line
 
-  drawPath: (path) ->
+  drawPath: (path, state) ->
     path = @s.path path
     path.attr
-      stroke: @strokeColor
-      strokeWidth: @strokeWidth
+      stroke: state?.strokeColor || @strokeColor
+      strokeWidth: state?.strokeWidth || @strokeWidth
       strokeLinecap: 'round'
       strokeLinejoin: 'round'
       fill: 'none'
@@ -81,6 +85,13 @@ class Note
 
   getAllElements: ->
     return @layer.node.children
+
+  getState: ->
+    return {
+      @strokeWidth
+      @strokeColor
+      @fillColor
+    }
 
 
 window.Note = Note

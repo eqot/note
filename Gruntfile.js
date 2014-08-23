@@ -142,7 +142,8 @@ module.exports = function (grunt) {
         globals: [
           'window', 'document', 'console',
           '$', 'Snap',
-          'Note', 'Focus', 'HandlerBase', 'Pick', 'Freehand', 'Rectangle', 'PenWidth', 'PenColor', 'FillColor'
+          'Note', 'Focus', 'HandlerBase', 'Pick', 'Freehand', 'Rectangle', 'PenWidth', 'PenColor', 'FillColor',
+          'CommandBase', 'CommandStack', 'CommandDrawObject'
         ]
       },
       target: {
